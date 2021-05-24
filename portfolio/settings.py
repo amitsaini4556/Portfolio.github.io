@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+import environ
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'h&7!^+86&m$5t(6lty7)==^9=t!en!oy=nsyea5h6ms9egdil)'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,11 +81,11 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'portfoliodb',
-        'USER':'postgres',
-        'PASSWORS':'firstdjango',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'NAME': env.str('NAME'),
+        'USER': env.str('USER'),
+        'PASSWORS': env.str('PASSWORS'),
+        'HOST': env.str('HOST'),
+        'PORT': env.int('PORT'),
 
     }
 }
